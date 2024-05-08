@@ -14,6 +14,8 @@ def getInfo(stop_id):
     soup = BeautifulSoup(data, "html.parser")
 
     data = soup.find_all('li')
+    if (data == []):
+        return []
     del data[0]
 
     data = html_to_json.convert(str(data))
