@@ -1,0 +1,19 @@
+version: '1'
+
+services:
+  flask:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    tty: true
+    command: bash -c "python3 server.py"
+    volumes:
+      - ./:/home
+    networks:
+      - flask-api
+networks:
+    flask-api:
+        driver: bridge
