@@ -17,13 +17,7 @@ def getInfo(stop_id, bus_name):
     del data[0]
 
     data = html_to_json.convert(str(data))
-    if (bus_name == 'null'):
-        pass
-    else:
-        keys = [x for x in data.keys()]
-        for key in keys:
-            if (key != bus_name):
-                del data[key]
+
 
     result = {}
     now = datetime.now()
@@ -36,6 +30,14 @@ def getInfo(stop_id, bus_name):
             temp.append({"time": arrival['_value'], "difference": round((start - now).total_seconds() / 60) - 300})
         result[item['_value'][:-2]] = temp
 
+    if (bus_name == 'null'):
+        pass
+    else:
+        keys = [x for x in result.keys()]
+        for key in keys:
+            if (key != bus_name):
+                # ...
+                del result[key]
     return result
 
 def getBuses():
