@@ -1,5 +1,5 @@
 import json
-from flask import Flask
+from flask import Flask, request
 from main import getInfo, getBuses, getBusStops
 
 app = Flask(__name__)
@@ -7,7 +7,8 @@ app = Flask(__name__)
 
 @app.route('/timetable/<stop_id>/')
 def get_by_stop(stop_id):
-    data = getInfo(stop_id=stop_id)
+    bus_name = request.args.get('bus')
+    data = getInfo(stop_id=stop_id, bus_name=bus_name)
     
     response = app.response_class(
         response=json.dumps({

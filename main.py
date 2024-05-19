@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import html_to_json
 from datetime import datetime
 
-def getInfo(stop_id):
+def getInfo(stop_id, bus_name):
     page = requests.get(f'https://m.gortransperm.ru/stoppoint-arrival-times/{stop_id}/')
 
     data = html.unescape(page.text)
@@ -17,6 +17,13 @@ def getInfo(stop_id):
     del data[0]
 
     data = html_to_json.convert(str(data))
+    if (bus_name == 'null'):
+        pass
+    else:
+        keys = [x for x in data.keys()]
+        for key in keys:
+            if (key != bus_name):
+                del data[key]
 
     result = {}
     now = datetime.now()
