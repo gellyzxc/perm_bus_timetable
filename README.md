@@ -1,3 +1,5 @@
+# Указывайте автора пожалуйста
+
 * Сборка
 ```bash
 docker compose up --build
